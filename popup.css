@@ -138,3 +138,27 @@ body{
     background-color: var(--mainCol);
     color: var(--accentCol);
 }
+#errorMessageAlert {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--shadowCol);
+    color: red;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+#registerBtn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--mainCol);
+    color: var(--accentCol);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}

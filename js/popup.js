@@ -1,9 +1,10 @@
-import { getActiveTab, generateTags } from "./utils.js";
+import { getActiveTab, generateTags } from "../utils.js";
 
 const formUrl = document.getElementById("url");
 const formTitle = document.getElementById("title");
 const formTags = document.getElementById("tags");
 const tagsSuggestion = document.getElementById("tagsSuggestion");
+const closeBtn = document.getElementById("closeBtn");
 
 const currentTab = await getActiveTab();
 formUrl.value = currentTab.url;
@@ -20,7 +21,11 @@ for (const tag of suggestiveTags) {
 
 tagsSuggestion.addEventListener("click", (e) => {
     if (e.target.classList.contains("tag")) {
-        formTags.value += e.target.innerText + " ,";
+        formTags.value += e.target.innerText + ", ";
         e.target.remove();
     }
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
 });

@@ -1,0 +1,25 @@
+<link href="popup.css" rel="stylesheet" type="text/css" />
+<div class="container">
+    <div class="head-section">
+        <div class="head-title-section">
+            <h1 class="title">EaseMyLink</h1>
+            <h3 id="closeBtn">X</h3>
+        </div>
+    </div>
+    <div class="body-section">
+        <form id="otpFormId">
+            <div class="form-section">
+                <label for="name">OTP</label>
+                <input type="text" name="otp" id="otp" />
+            </div>
+            <div class="form-section">
+                <button type="submit">Verify OTP</button>
+            </div>
+        </form>
+
+        <div id="errorMessageAlert" style="display: none;">
+            <span id="errorMsg"></span>
+        </div>
+    </div>
+</div>
+<script type="module" src="js/otp.js"></script>
