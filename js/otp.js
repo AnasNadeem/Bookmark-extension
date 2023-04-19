@@ -1,5 +1,4 @@
-const BASE_API = 'http://127.0.0.1:8000';
-const OTP_API = `${BASE_API}/api/user/verify_otp`;
+import { OTP_API } from './utils.js';
 
 const otpFormId = document.getElementById('otpFormId');
 const otpInput = document.getElementById('otp');
@@ -12,13 +11,13 @@ closeBtn.addEventListener("click", () => {
 });
 
 let user = {}
-if(chrome.storage.local.get('user', (data) => {
+chrome.storage.local.get('user', (data) => {
     if(data.user){
         user = data.user;
         successMsg.innerHTML = `OTP sent to ${data.user.email}`;
         messageAlert.style.display = 'block';
     }
-}));
+});
 
 otpFormId.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -41,7 +40,6 @@ otpFormId.addEventListener('submit', (e) => {
     })
     .then(data => {
         chrome.storage.local.set({'user': data});
-        chrome.storage.local.set({'token': data.token});
         document.location = 'popup.html';
     })
     .catch((errresp) => {

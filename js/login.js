@@ -1,16 +1,16 @@
-const BASE_API = 'http://127.0.0.1:8000';
-const LOGIN_API = `${BASE_API}/api/user/login`;
+import { LOGIN_API } from './utils.js';
+
 const registerBtn = document.getElementById('registerBtn');
 
 const loginFormId = document.getElementById('loginFormId');
 const messageAlert = document.getElementById('messageAlert');
 const errorMsg = document.getElementById('errorMsg');
 
-if(chrome.storage.local.get('token', (data) => {
-    if(data.token){
+chrome.storage.local.get('user', (data) => {
+    if(data.user){
         document.location = 'popup.html';
     }
-}));
+});
 
 registerBtn.addEventListener('click', () => {
     document.location = 'register.html';
