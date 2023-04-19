@@ -14,7 +14,13 @@
         <p class="form-title">
             Add new bookmark
         </p>
-        <form action="post">
+
+        <div id="messageAlert" style="display: none;">
+            <span id="errorMsg"></span>
+            <span id="successMsg"></span>
+        </div>
+
+        <form id="bookmarkFormId">
             <div class="form-section">
                 <label for="url">Link</label>
                 <input type="text" name="url" id="url" />

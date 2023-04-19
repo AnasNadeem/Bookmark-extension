@@ -1,7 +1,6 @@
-const BASE_API = 'http://127.0.0.1:8000';
-const REGISTER_API = `${BASE_API}/api/user`;
-const loginBtn = document.getElementById('loginBtn');
+import { REGISTER_API } from './utils.js';
 
+const loginBtn = document.getElementById('loginBtn');
 const registerFormId = document.getElementById('registerFormId');
 
 loginBtn.addEventListener('click', () => {

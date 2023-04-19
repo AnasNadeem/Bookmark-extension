@@ -1,5 +1,4 @@
-const BASE_API = 'http://127.0.0.1:8000';
-const OTP_API = `${BASE_API}/api/user/verify_otp`;
+import { OTP_API } from './utils.js';
 
 const otpFormId = document.getElementById('otpFormId');
 const otpInput = document.getElementById('otp');

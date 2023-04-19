@@ -17,3 +17,9 @@ export function generateTags(title) {
     });
     return [... new Set(filteredTags)];
 }
+
+const BASE_API = 'http://127.0.0.1:8000';
+export const LOGIN_API = `${BASE_API}/api/user/login`;
+export const REGISTER_API = `${BASE_API}/api/user/`;
+export const OTP_API = `${BASE_API}/api/user/verify_otp`;
+export const BOOKMARK_API = `${BASE_API}/api/bookmark/`;
