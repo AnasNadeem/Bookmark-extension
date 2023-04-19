@@ -87,11 +87,13 @@ bookmarkFormId.addEventListener('submit', (e) => {
     })
     .then(data => {
         successMsg.innerHTML = 'Bookmark added successfully';
+        errorMsg.innerHTML = '';
         messageAlert.style.display = 'block';
     })
     .catch((errresp) => {
         errresp.json().then(err => {
             errorMsg.innerHTML = err.error;
+            successMsg.innerHTML = '';
             messageAlert.style.display = 'block';
         })
     })

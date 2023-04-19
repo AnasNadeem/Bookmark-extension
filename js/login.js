@@ -6,11 +6,11 @@ const loginFormId = document.getElementById('loginFormId');
 const messageAlert = document.getElementById('messageAlert');
 const errorMsg = document.getElementById('errorMsg');
 
-if(chrome.storage.local.get('user', (data) => {
+chrome.storage.local.get('user', (data) => {
     if(data.user){
         document.location = 'popup.html';
     }
-}));
+});
 
 registerBtn.addEventListener('click', () => {
     document.location = 'register.html';
