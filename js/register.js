@@ -8,27 +8,36 @@ loginBtn.addEventListener('click', () => {
     document.location = 'login.html';
 });
 
+closeBtn.addEventListener("click", () => {
+    window.close();
+});
+
 registerFormId.addEventListener('submit', (e) => {
+    e.preventDefault();
     // const firstName = document.getElementById('firstName').value;
     // const lastName = document.getElementById('lastName').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    const errorMessageAlert = document.getElementById('errorMessageAlert');
+    const messageAlert = document.getElementById('messageAlert');
     const errorMsg = document.getElementById('errorMsg');
 
     if (!email || !password || !confirmPassword) {
         errorMsg.innerHTML = 'Please enter your email and password';
-        if (errorMessageAlert.style.display != 'block'){
-            errorMessageAlert.style.display = 'block';
-        }
+        messageAlert.style.display = 'block';
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        errorMsg.innerHTML = 'Password and confirm password do not match';
+        messageAlert.style.display = 'block';
         return;
     }
 
     const registerData = {
-        'email': email.value,
-        'password': password.value
+        'email': email,
+        'password': password
     }
     const header = {
         method: 'POST',
@@ -38,7 +47,7 @@ registerFormId.addEventListener('submit', (e) => {
 
     fetch(REGISTER_API, header)
     .then(resp => {
-        if(resp.status===201){
+        if(resp.ok){
             return resp.json();
         }
         return Promise.reject(resp);
@@ -50,13 +59,13 @@ registerFormId.addEventListener('submit', (e) => {
     .catch((errresp) => {
         errresp.json().then(err => {
             console.log('error:', err)
-            let errorMessageAlert = document.getElementById('errorMessageAlert');
+            let messageAlert = document.getElementById('messageAlert');
             let errorMsg = document.getElementById('errorMsg');
             for (const [key, value] of Object.entries(err)) {
             errorMsg.innerHTML += `${key}: ${value} <br>`;
             }
-            if (errorMessageAlert.style.display != 'block'){
-                errorMessageAlert.style.display = 'block';
+            if (messageAlert.style.display != 'block'){
+                messageAlert.style.display = 'block';
             }
         })
     })

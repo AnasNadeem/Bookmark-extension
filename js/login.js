@@ -3,18 +3,21 @@ const LOGIN_API = `${BASE_API}/api/user/login`;
 const registerBtn = document.getElementById('registerBtn');
 
 const loginFormId = document.getElementById('loginFormId');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
 
 if(chrome.storage.local.get('token', (data) => {
-    console.log(data, data.token);
-    // if(!data){
-    //     document.location = 'login.html';
-    // } else {
-    //     document.location = 'popup.html';
-    // }
+    if(data.token){
+        document.location = 'popup.html';
+    }
 }));
 
 registerBtn.addEventListener('click', () => {
     document.location = 'register.html';
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
 });
 
 loginFormId.addEventListener('submit', (e) => {
@@ -45,15 +48,19 @@ loginFormId.addEventListener('submit', (e) => {
         return Promise.reject(response);
     })
     .then(data => {
-        document.location = 'popup.html';
+        if (!data.is_active){
+            chrome.storage.local.set({'user': data});
+            document.location = 'otp.html';
+        } else{
+            chrome.storage.local.set({'user': data});
+            document.location = 'popup.html';
+        }
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            let errorMessageAlert = document.getElementById('errorMessageAlert');
-            let errorMsg = document.getElementById('errorMsg');
             errorMsg.innerHTML = err.error;
-            if (errorMessageAlert.style.display != 'block'){
-                errorMessageAlert.style.display = 'block';
+            if (messageAlert.style.display != 'block'){
+                messageAlert.style.display = 'block';
             }
         })
     })

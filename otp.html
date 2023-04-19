@@ -7,6 +7,11 @@
         </div>
     </div>
     <div class="body-section">
+        <div id="messageAlert" style="display: none;">
+            <span id="errorMsg"></span>
+            <span id="successMsg"></span>
+        </div>
+
         <form id="otpFormId">
             <div class="form-section">
                 <label for="name">OTP</label>
@@ -16,10 +21,6 @@
                 <button type="submit">Verify OTP</button>
             </div>
         </form>
-
-        <div id="errorMessageAlert" style="display: none;">
-            <span id="errorMsg"></span>
-        </div>
     </div>
 </div>
 <script type="module" src="js/otp.js"></script>

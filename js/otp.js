@@ -3,12 +3,25 @@ const OTP_API = `${BASE_API}/api/user/verify_otp`;
 
 const otpFormId = document.getElementById('otpFormId');
 const otpInput = document.getElementById('otp');
+const successMsg = document.getElementById('successMsg');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
+
+closeBtn.addEventListener("click", () => {
+    window.close();
+});
+
+let user = {}
+if(chrome.storage.local.get('user', (data) => {
+    if(data.user){
+        user = data.user;
+        successMsg.innerHTML = `OTP sent to ${data.user.email}`;
+        messageAlert.style.display = 'block';
+    }
+}));
 
 otpFormId.addEventListener('submit', (e) => {
     e.preventDefault();
-    const user = chrome.storage.local.get('user', (data) => {
-        return data;
-    });
     const otp = otpInput.value;
     const otpData = {
         'email': user.email,
@@ -27,17 +40,17 @@ otpFormId.addEventListener('submit', (e) => {
         return Promise.reject(resp);
     })
     .then(data => {
+        chrome.storage.local.set({'user': data});
         chrome.storage.local.set({'token': data.token});
         document.location = 'popup.html';
     })
     .catch((errresp) => {
         errresp.json().then(err => {
             console.log('error:', err)
-            let errorMessageAlert = document.getElementById('errorMessageAlert');
-            let errorMsg = document.getElementById('errorMsg');
             errorMsg.innerHTML = err.error;
-            if (errorMessageAlert.style.display != 'block'){
-                errorMessageAlert.style.display = 'block';
+            successMsg.innerHTML = '';
+            if (messageAlert.style.display != 'block'){
+                messageAlert.style.display = 'block';
             }
         })
     })
