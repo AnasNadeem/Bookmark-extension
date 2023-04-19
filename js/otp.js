@@ -11,13 +11,13 @@ closeBtn.addEventListener("click", () => {
 });
 
 let user = {}
-if(chrome.storage.local.get('user', (data) => {
+chrome.storage.local.get('user', (data) => {
     if(data.user){
         user = data.user;
         successMsg.innerHTML = `OTP sent to ${data.user.email}`;
         messageAlert.style.display = 'block';
     }
-}));
+});
 
 otpFormId.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -40,7 +40,6 @@ otpFormId.addEventListener('submit', (e) => {
     })
     .then(data => {
         chrome.storage.local.set({'user': data});
-        chrome.storage.local.set({'token': data.token});
         document.location = 'popup.html';
     })
     .catch((errresp) => {

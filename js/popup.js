@@ -30,6 +30,10 @@ closeBtn.addEventListener("click", () => {
     window.close();
 });
 
+let user = {}
+chrome.storage.local.get('user', (data) => {
+    user = data.user;
+});
 
 const bookmarkFormId = document.getElementById('bookmarkFormId');
 const messageAlert = document.getElementById('messageAlert');
@@ -47,38 +51,48 @@ bookmarkFormId.addEventListener('submit', (e) => {
         errorMsg.innerHTML = 'Please enter your url and title';
     }
 
-    console.log(urlInput, titleInput, tagsInput);
+    let tags = tagsInput.split(',').map(tag => tag.trim());
+    tags = [...new Set(tags)];
+    let tagList = [];
+    for (let i = 0; i < tags.length; i++) {
+        if (tags[i] === '') {
+            tags.splice(i, 1);
+            continue;
+        }
+        const tag = {'name': tags[i].toLowerCase()}
+        tagList.push(tag);
+    }
+
     const bookmarkData = {
         'url': urlInput,
         'title': titleInput,
-        'tags': tagsInput
+        'tags': tagList
     }
 
     const header = {
         method: 'POST',
-        headers: { "Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `${user.token}`
+        },
         body: JSON.stringify(bookmarkData)
     }
 
     fetch(BOOKMARK_API, header)
-    .then(response => {
-        if (response.ok){
-            return response.json()
+    .then(resp => {
+        if (resp.ok){
+            return resp.json()
         }
-        return Promise.reject(response);
+        return Promise.reject(resp);
     })
     .then(data => {
-        successMsg.innerHTML = data.message;
-        messageAlert.classList.add('alert-success');
-        messageAlert.classList.remove('alert-danger');
-        messageAlert.classList.remove('d-none');
+        successMsg.innerHTML = 'Bookmark added successfully';
+        messageAlert.style.display = 'block';
     })
     .catch((errresp) => {
         errresp.json().then(err => {
             errorMsg.innerHTML = err.error;
-            messageAlert.classList.add('alert-danger');
-            messageAlert.classList.remove('alert-success');
-            messageAlert.classList.remove('d-none');
+            messageAlert.style.display = 'block';
         })
     })
 });
