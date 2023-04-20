@@ -7,9 +7,6 @@
     "default_title": "Easemylink",
     "default_popup": "login.html"
   },
-  "background": {
-    "service_worker": "js/background.js"
-  },
   "permissions": ["tabs", "storage"],
   "host_permissions": ["http://127.0.0.1:8000/*"]
 }
