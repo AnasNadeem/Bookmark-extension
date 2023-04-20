@@ -1,1 +1,25 @@
-const _0x787a3a=_0x54b2;(function(_0x41a648,_0x28a5e5){const _0x417f54=_0x54b2,_0xbdb9ca=_0x41a648();while(!![]){try{const _0x3411dc=-parseInt(_0x417f54(0x122))/0x1*(parseInt(_0x417f54(0xf0))/0x2)+parseInt(_0x417f54(0x114))/0x3*(parseInt(_0x417f54(0xe9))/0x4)+parseInt(_0x417f54(0x12a))/0x5*(-parseInt(_0x417f54(0xf4))/0x6)+parseInt(_0x417f54(0xea))/0x7*(parseInt(_0x417f54(0xf1))/0x8)+-parseInt(_0x417f54(0xe6))/0x9+parseInt(_0x417f54(0x109))/0xa*(-parseInt(_0x417f54(0x125))/0xb)+parseInt(_0x417f54(0x10d))/0xc;if(_0x3411dc===_0x28a5e5)break;else _0xbdb9ca['push'](_0xbdb9ca['shift']());}catch(_0x53ca8f){_0xbdb9ca['push'](_0xbdb9ca['shift']());}}}(_0xad58,0xe28bd));function _0x54b2(_0x2c22dc,_0x2650e0){const _0xad5827=_0xad58();return _0x54b2=function(_0x54b22d,_0x38ee81){_0x54b22d=_0x54b22d-0xe5;let _0x524fbd=_0xad5827[_0x54b22d];return _0x524fbd;},_0x54b2(_0x2c22dc,_0x2650e0);}export async function getActiveTab(){const _0x407d3b=_0x54b2,_0x3eba39=await chrome[_0x407d3b(0x11c)][_0x407d3b(0x11f)]({'currentWindow':!![],'active':!![]});return _0x3eba39[0x0];}function _0xad58(){const _0x296a13=['390Xubmgg','without','split','behind','with','across','over','down','forEach','beneath','among','near','excepting','via','per','from','through','next','around','since','except','874590ZIIvTL','like','length','along','17488728EfvTSh','aside','until','toward','round','within','against','39FTbIkz','into','beyond','than','save','past','above','includes','tabs','toLowerCase','outside','query','replace','below','1994dHutEC','towards','back','11gvWMoi','off','excluding','onto','are','27605xHDObu','despite','4274136EuUwaV','unlike','besides','142996sBJguu','84238qrmMhQ','considering','regarding','but','/user/verify_otp','between','1244PHIyfL','776igfuZd','plus','inside'];_0xad58=function(){return _0x296a13;};return _0xad58();}export function generateTags(_0x5a3c17){const _0x595019=_0x54b2,_0xb95190=_0x5a3c17[_0x595019(0xf6)]('\x20'),_0x3fa622=['the','a','an','and','or',_0x595019(0xed),'for','nor','so','yet','at','by','in','of','on','to','up','as','if',_0x595019(0x115),_0x595019(0x129),_0x595019(0x10a),_0x595019(0x117),_0x595019(0x101),_0x595019(0xf8),_0x595019(0xf5),'after',_0x595019(0x10c),_0x595019(0x103),'is',_0x595019(0xff),_0x595019(0x126),_0x595019(0x128),'out',_0x595019(0xfa),_0x595019(0x119),'under',_0x595019(0x112),'about',_0x595019(0x11a),_0x595019(0xf9),_0x595019(0x113),'amid',_0x595019(0xfe),_0x595019(0x106),'before',_0x595019(0xf7),_0x595019(0x121),_0x595019(0xfd),'beside',_0x595019(0xe8),_0x595019(0xef),_0x595019(0x116),'concerning',_0x595019(0xeb),_0x595019(0xe5),_0x595019(0xfb),'during',_0x595019(0x108),_0x595019(0x100),_0x595019(0x127),'following',_0x595019(0xf3),'minus',_0x595019(0x105),'opposite',_0x595019(0x11e),_0x595019(0x102),_0x595019(0xf2),_0x595019(0xec),_0x595019(0x111),_0x595019(0x118),_0x595019(0x107),_0x595019(0x104),_0x595019(0x110),_0x595019(0x123),'underneath',_0x595019(0xe7),_0x595019(0x10f),'upon','according','ahead','apart',_0x595019(0x10e),'away',_0x595019(0x124)];_0xb95190[_0x595019(0xfc)]((_0x23c38e,_0x5c014b)=>{const _0x47c02e=_0x595019;_0xb95190[_0x5c014b]=_0x23c38e[_0x47c02e(0x120)](/[^a-zA-Z0-9]/g,'');});const _0x96806d=_0xb95190['filter'](_0x3d3c75=>{const _0x1713f2=_0x595019;return _0x3d3c75[_0x1713f2(0x10b)]>=0x3&&_0x3d3c75[_0x1713f2(0x10b)]<=0xf&&!_0x3fa622[_0x1713f2(0x11b)](_0x3d3c75[_0x1713f2(0x11d)]());});return[...new Set(_0x96806d)];}const BASE_API='http://127.0.0.1:8000/api';export const LOGIN_API=BASE_API+'/user/login';export const REGISTER_API=BASE_API+'/user';export const OTP_API=BASE_API+_0x787a3a(0xee);export const BOOKMARK_API=BASE_API+'/bookmark';
+export async function getActiveTab() {
+    const tabs = await chrome.tabs.query({
+        currentWindow: true,
+        active: true
+    });
+    return tabs[0];
+}
+
+export function generateTags(title) {
+    const tags = title.split(" ");
+    const commonWords = ['the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'so', 'yet', 'at', 'by', 'in', 'of', 'on', 'to', 'up', 'as', 'if', 'into', 'are', 'like', 'than', 'via', 'with', 'without', 'after', 'along', 'from', 'is', 'near', 'off', 'onto', 'out', 'over', 'past', 'under', 'within', 'about', 'above', 'across', 'against', 'amid', 'among', 'around', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond', 'concerning', 'considering', 'despite', 'down', 'during', 'except', 'excepting', 'excluding', 'following', 'inside', 'minus', 'next', 'opposite', 'outside', 'per', 'plus', 'regarding', 'round', 'save', 'since', 'through', 'toward', 'towards', 'underneath', 'unlike', 'until', 'upon', 'according', 'ahead', 'apart', 'aside', 'away', 'back']
+    tags.forEach((tag, index) => {
+        tags[index] = tag.replace(/[^a-zA-Z0-9]/g, "");
+    });
+    const filteredTags = tags.filter(tag => {
+        return tag.length >= 3 && tag.length <= 15 && !commonWords.includes(tag.toLowerCase());
+    });
+    return [... new Set(filteredTags)];
+}
+
+const BASE_API = 'http://127.0.0.1:8000/api';
+export const LOGIN_API = `${BASE_API}/user/login`;
+export const REGISTER_API = `${BASE_API}/user`;
+export const OTP_API = `${BASE_API}/user/verify_otp`;
+export const BOOKMARK_API = `${BASE_API}/bookmark`;
