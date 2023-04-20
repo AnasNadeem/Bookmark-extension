@@ -1,1 +1,100 @@
-const _0x413763=_0x4a75;(function(_0x324347,_0x3c37ee){const _0xd2aee3=_0x4a75,_0x224c15=_0x324347();while(!![]){try{const _0x562b80=parseInt(_0xd2aee3(0xd6))/0x1+parseInt(_0xd2aee3(0xde))/0x2+-parseInt(_0xd2aee3(0xd9))/0x3+-parseInt(_0xd2aee3(0xda))/0x4+parseInt(_0xd2aee3(0xbe))/0x5+parseInt(_0xd2aee3(0xc8))/0x6+-parseInt(_0xd2aee3(0xcd))/0x7;if(_0x562b80===_0x3c37ee)break;else _0x224c15['push'](_0x224c15['shift']());}catch(_0x4d802f){_0x224c15['push'](_0x224c15['shift']());}}}(_0x1206,0xbe6c7));import{getActiveTab,generateTags,BOOKMARK_API}from'./utils.js';const formUrl=document[_0x413763(0xe6)]('url'),formTitle=document[_0x413763(0xe6)](_0x413763(0xe3)),formTags=document[_0x413763(0xe6)](_0x413763(0xc2)),tagsSuggestion=document['getElementById']('tagsSuggestion'),closeBtn=document[_0x413763(0xe6)](_0x413763(0xe5)),currentTab=await getActiveTab();function _0x4a75(_0x43ee98,_0x1e0472){const _0x12060f=_0x1206();return _0x4a75=function(_0x4a7545,_0x12a07e){_0x4a7545=_0x4a7545-0xba;let _0x2f3f04=_0x12060f[_0x4a7545];return _0x2f3f04;},_0x4a75(_0x43ee98,_0x1e0472);}function _0x1206(){const _0xf4934b=['preventDefault','display','1552539OfOtEu','417116LmjAPL','storage','createElement','errorMsg','1772252XDSqta','style','innerText','innerHTML','messageAlert','title','push','closeBtn','getElementById','target','length','appendChild','click','submit','toLowerCase','reject','1255135jWjIti','stringify','block','addEventListener','tags','add','local','split','then','tag','8627214akEVrN','contains','value','token','close','19107536UJuPuH','classList','error','Please\x20enter\x20your\x20url\x20and\x20title','json','Bookmark\x20added\x20successfully','map','url','application/json','1556393eKNqZN'];_0x1206=function(){return _0xf4934b;};return _0x1206();}formUrl[_0x413763(0xca)]=currentTab[_0x413763(0xd4)],formTitle[_0x413763(0xca)]=currentTab['title'];const suggestiveTags=generateTags(currentTab[_0x413763(0xe3)]);for(const tag of suggestiveTags){const tagElement=document[_0x413763(0xdc)]('p');tagElement[_0x413763(0xce)][_0x413763(0xc3)](_0x413763(0xc7)),tagElement[_0x413763(0xe0)]=tag[_0x413763(0xbc)](),tagsSuggestion[_0x413763(0xe9)](tagElement);}tagsSuggestion[_0x413763(0xc1)]('click',_0x3007a9=>{const _0x17f033=_0x413763;_0x3007a9[_0x17f033(0xe7)][_0x17f033(0xce)][_0x17f033(0xc9)](_0x17f033(0xc7))&&(formTags[_0x17f033(0xca)]+=_0x3007a9[_0x17f033(0xe7)][_0x17f033(0xe0)]+',\x20',_0x3007a9[_0x17f033(0xe7)]['remove']());}),closeBtn[_0x413763(0xc1)](_0x413763(0xba),()=>{const _0x422db3=_0x413763;window[_0x422db3(0xcc)]();});let user={};chrome[_0x413763(0xdb)][_0x413763(0xc4)]['get']('user',_0x345d2b=>{user=_0x345d2b['user'];});const bookmarkFormId=document[_0x413763(0xe6)]('bookmarkFormId'),messageAlert=document[_0x413763(0xe6)](_0x413763(0xe2)),errorMsg=document['getElementById'](_0x413763(0xdd)),successMsg=document[_0x413763(0xe6)]('successMsg');bookmarkFormId[_0x413763(0xc1)](_0x413763(0xbb),_0x123529=>{const _0x57995e=_0x413763;_0x123529[_0x57995e(0xd7)]();const _0x19b599=document[_0x57995e(0xe6)]('url')[_0x57995e(0xca)],_0x1a6a2e=document[_0x57995e(0xe6)](_0x57995e(0xe3))['value'],_0x44a0e3=document[_0x57995e(0xe6)]('tags')[_0x57995e(0xca)];(!_0x19b599||!_0x1a6a2e)&&(errorMsg['innerHTML']=_0x57995e(0xd0));let _0x1e3216=_0x44a0e3[_0x57995e(0xc5)](',')[_0x57995e(0xd3)](_0x37a5f4=>_0x37a5f4['trim']());_0x1e3216=[...new Set(_0x1e3216)];let _0x24fbeb=[];for(let _0x23e5a5=0x0;_0x23e5a5<_0x1e3216[_0x57995e(0xe8)];_0x23e5a5++){if(_0x1e3216[_0x23e5a5]===''){_0x1e3216['splice'](_0x23e5a5,0x1);continue;}const _0xa22581={'name':_0x1e3216[_0x23e5a5][_0x57995e(0xbc)]()};_0x24fbeb[_0x57995e(0xe4)](_0xa22581);}const _0x1d390f={'url':_0x19b599,'title':_0x1a6a2e,'tags':_0x24fbeb},_0x237529={'method':'POST','headers':{'Content-Type':_0x57995e(0xd5),'Authorization':''+user[_0x57995e(0xcb)]},'body':JSON[_0x57995e(0xbf)](_0x1d390f)};fetch(BOOKMARK_API,_0x237529)[_0x57995e(0xc6)](_0x1192c8=>{const _0x5d304f=_0x57995e;if(_0x1192c8['ok'])return _0x1192c8[_0x5d304f(0xd1)]();return Promise[_0x5d304f(0xbd)](_0x1192c8);})[_0x57995e(0xc6)](_0x25d7ce=>{const _0x4484e5=_0x57995e;successMsg[_0x4484e5(0xe1)]=_0x4484e5(0xd2),errorMsg[_0x4484e5(0xe1)]='',messageAlert['style'][_0x4484e5(0xd8)]='block';})['catch'](_0x1e4bee=>{const _0x470947=_0x57995e;_0x1e4bee[_0x470947(0xd1)]()['then'](_0x498374=>{const _0x30673e=_0x470947;errorMsg[_0x30673e(0xe1)]=_0x498374[_0x30673e(0xcf)],successMsg[_0x30673e(0xe1)]='',messageAlert[_0x30673e(0xdf)][_0x30673e(0xd8)]=_0x30673e(0xc0);});});});
+import { getActiveTab, generateTags, BOOKMARK_API } from "./utils.js";
+
+const formUrl = document.getElementById("url");
+const formTitle = document.getElementById("title");
+const formTags = document.getElementById("tags");
+const tagsSuggestion = document.getElementById("tagsSuggestion");
+const closeBtn = document.getElementById("closeBtn");
+
+const currentTab = await getActiveTab();
+formUrl.value = currentTab.url;
+formTitle.value = currentTab.title;
+
+// Suggested tags based on site title
+const suggestiveTags = generateTags(currentTab.title);
+for (const tag of suggestiveTags) {
+    const tagElement = document.createElement("p");
+    tagElement.classList.add("tag");
+    tagElement.innerText = tag.toLowerCase();
+    tagsSuggestion.appendChild(tagElement);
+}
+
+tagsSuggestion.addEventListener("click", (e) => {
+    if (e.target.classList.contains("tag")) {
+        formTags.value += e.target.innerText + ", ";
+        e.target.remove();
+    }
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
+});
+
+let user = {}
+chrome.storage.local.get('user', (data) => {
+    user = data.user;
+});
+
+const bookmarkFormId = document.getElementById('bookmarkFormId');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
+const successMsg = document.getElementById('successMsg');
+
+
+bookmarkFormId.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const urlInput = document.getElementById('url').value;
+    const titleInput = document.getElementById('title').value;
+    const tagsInput = document.getElementById('tags').value;
+
+    if (!urlInput || !titleInput) {
+        errorMsg.innerHTML = 'Please enter your url and title';
+    }
+
+    let tags = tagsInput.split(',').map(tag => tag.trim());
+    tags = [...new Set(tags)];
+    let tagList = [];
+    for (let i = 0; i < tags.length; i++) {
+        if (tags[i] === '') {
+            tags.splice(i, 1);
+            continue;
+        }
+        const tag = {'name': tags[i].toLowerCase()}
+        tagList.push(tag);
+    }
+
+    const bookmarkData = {
+        'url': urlInput,
+        'title': titleInput,
+        'tags': tagList
+    }
+
+    const header = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `${user.token}`
+        },
+        body: JSON.stringify(bookmarkData)
+    }
+
+    fetch(BOOKMARK_API, header)
+    .then(resp => {
+        if (resp.ok){
+            return resp.json()
+        }
+        return Promise.reject(resp);
+    })
+    .then(data => {
+        successMsg.innerHTML = 'Bookmark added successfully';
+        errorMsg.innerHTML = '';
+        messageAlert.style.display = 'block';
+    })
+    .catch((errresp) => {
+        errresp.json().then(err => {
+            errorMsg.innerHTML = err.error;
+            successMsg.innerHTML = '';
+            messageAlert.style.display = 'block';
+        })
+    })
+});

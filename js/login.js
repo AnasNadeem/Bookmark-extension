@@ -1,1 +1,68 @@
-const _0x5644fd=_0x30c4;(function(_0x52b337,_0x4fbcba){const _0xaeda8c=_0x30c4,_0x3f8dc0=_0x52b337();while(!![]){try{const _0x15808e=parseInt(_0xaeda8c(0x130))/0x1*(parseInt(_0xaeda8c(0x138))/0x2)+-parseInt(_0xaeda8c(0x14c))/0x3+-parseInt(_0xaeda8c(0x142))/0x4+parseInt(_0xaeda8c(0x140))/0x5*(-parseInt(_0xaeda8c(0x137))/0x6)+parseInt(_0xaeda8c(0x14a))/0x7*(-parseInt(_0xaeda8c(0x13a))/0x8)+-parseInt(_0xaeda8c(0x129))/0x9+-parseInt(_0xaeda8c(0x13d))/0xa*(-parseInt(_0xaeda8c(0x14b))/0xb);if(_0x15808e===_0x4fbcba)break;else _0x3f8dc0['push'](_0x3f8dc0['shift']());}catch(_0x33084f){_0x3f8dc0['push'](_0x3f8dc0['shift']());}}}(_0x3960,0xbf9a2));import{LOGIN_API}from'./utils.js';function _0x3960(){const _0xce4065=['errorMsg','local','messageAlert','3846OAeTTQ','4448CFEBPI','user','47872lCZQmL','then','close','10HVgaZs','Please\x20enter\x20your\x20email\x20and\x20password','block','5055hAwkAW','value','2870684kYhvmy','preventDefault','getElementById','display','click','get','otp.html','registerBtn','1288tdlaKH','34881253DKtdrP','1826724RiCCMQ','email','location','application/json','storage','3822831CuJyqA','innerHTML','error','addEventListener','submit','json','stringify','501ProWGh','reject','popup.html','style'];_0x3960=function(){return _0xce4065;};return _0x3960();}function _0x30c4(_0x59d7dd,_0x12cd2f){const _0x3960d5=_0x3960();return _0x30c4=function(_0x30c45c,_0x3b7f0b){_0x30c45c=_0x30c45c-0x128;let _0x192d2c=_0x3960d5[_0x30c45c];return _0x192d2c;},_0x30c4(_0x59d7dd,_0x12cd2f);}const registerBtn=document['getElementById'](_0x5644fd(0x149)),loginFormId=document['getElementById']('loginFormId'),messageAlert=document[_0x5644fd(0x144)](_0x5644fd(0x136)),errorMsg=document[_0x5644fd(0x144)](_0x5644fd(0x134));chrome[_0x5644fd(0x128)]['local'][_0x5644fd(0x147)](_0x5644fd(0x139),_0x515906=>{const _0x5bf251=_0x5644fd;_0x515906[_0x5bf251(0x139)]&&(document[_0x5bf251(0x14e)]=_0x5bf251(0x132));}),registerBtn[_0x5644fd(0x12c)](_0x5644fd(0x146),()=>{const _0x57dc1c=_0x5644fd;document[_0x57dc1c(0x14e)]='register.html';}),closeBtn[_0x5644fd(0x12c)](_0x5644fd(0x146),()=>{const _0x47fc0c=_0x5644fd;window[_0x47fc0c(0x13c)]();}),loginFormId[_0x5644fd(0x12c)](_0x5644fd(0x12d),_0x3ee97e=>{const _0x2abe33=_0x5644fd;_0x3ee97e[_0x2abe33(0x143)]();const _0x2dd026=document[_0x2abe33(0x144)](_0x2abe33(0x14d))[_0x2abe33(0x141)],_0x50235a=document['getElementById']('password')[_0x2abe33(0x141)];(!_0x2dd026||!_0x50235a)&&alert(_0x2abe33(0x13e));const _0x2e37ae={'email':_0x2dd026,'password':_0x50235a},_0x3a3f7d={'method':'POST','headers':{'Content-Type':_0x2abe33(0x14f)},'body':JSON[_0x2abe33(0x12f)](_0x2e37ae)};fetch(LOGIN_API,_0x3a3f7d)['then'](_0x29a7b6=>{const _0x1bd552=_0x2abe33;if(_0x29a7b6['ok'])return _0x29a7b6['json']();return Promise[_0x1bd552(0x131)](_0x29a7b6);})[_0x2abe33(0x13b)](_0x3baf17=>{const _0xd875fd=_0x2abe33;!_0x3baf17['is_active']?(chrome[_0xd875fd(0x128)]['local']['set']({'user':_0x3baf17}),document[_0xd875fd(0x14e)]=_0xd875fd(0x148)):(chrome[_0xd875fd(0x128)][_0xd875fd(0x135)]['set']({'user':_0x3baf17}),document[_0xd875fd(0x14e)]=_0xd875fd(0x132));})['catch'](_0x15d4eb=>{const _0x58c491=_0x2abe33;_0x15d4eb[_0x58c491(0x12e)]()[_0x58c491(0x13b)](_0x165cae=>{const _0xf636e=_0x58c491;errorMsg[_0xf636e(0x12a)]=_0x165cae[_0xf636e(0x12b)],messageAlert['style'][_0xf636e(0x145)]!=_0xf636e(0x13f)&&(messageAlert[_0xf636e(0x133)][_0xf636e(0x145)]=_0xf636e(0x13f));});});});
+import { LOGIN_API } from './utils.js';
+
+const registerBtn = document.getElementById('registerBtn');
+
+const loginFormId = document.getElementById('loginFormId');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
+
+chrome.storage.local.get('user', (data) => {
+    if(data.user){
+        document.location = 'popup.html';
+    }
+});
+
+registerBtn.addEventListener('click', () => {
+    document.location = 'register.html';
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
+});
+
+loginFormId.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById('email').value;
+    const passwordInput = document.getElementById('password').value;
+
+    if (!emailInput || !passwordInput) {
+        alert('Please enter your email and password');
+    }
+
+    const loginData = {
+        'email': emailInput,
+        'password': passwordInput
+    }
+
+    const header = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(loginData)
+    }
+
+    fetch(LOGIN_API, header)
+    .then(response => {
+        if (response.ok){
+            return response.json()
+        }
+        return Promise.reject(response);
+    })
+    .then(data => {
+        if (!data.is_active){
+            chrome.storage.local.set({'user': data});
+            document.location = 'otp.html';
+        } else{
+            chrome.storage.local.set({'user': data});
+            document.location = 'popup.html';
+        }
+    })
+    .catch((errresp) => {
+        errresp.json().then(err => {
+            errorMsg.innerHTML = err.error;
+            if (messageAlert.style.display != 'block'){
+                messageAlert.style.display = 'block';
+            }
+        })
+    })
+
+});

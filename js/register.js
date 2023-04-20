@@ -1,1 +1,72 @@
-const _0x291bd4=_0x1977;function _0x1977(_0x544fe1,_0x604930){const _0x4ea446=_0x4ea4();return _0x1977=function(_0x19776d,_0x37dfc5){_0x19776d=_0x19776d-0x186;let _0x234482=_0x4ea446[_0x19776d];return _0x234482;},_0x1977(_0x544fe1,_0x604930);}function _0x4ea4(){const _0x36cd0b=['12468rCKIPq','690OavUQO','application/json','7768519HcaoGz','log','loginBtn','181608xGxPpB','confirmPassword','then','error:','2366234EOEzsu','registerFormId','addEventListener','otp.html','getElementById','POST','entries','storage','messageAlert','submit','json','520732cjKTHO','errorMsg','preventDefault','24xxprnQ','Please\x20enter\x20your\x20email\x20and\x20password','3178154cMYOVp','click','value','style','local','display','122679yDoRjq','16aTWhIT','email','stringify','location','innerHTML','block','login.html','39YigoUz','265yUXjHk'];_0x4ea4=function(){return _0x36cd0b;};return _0x4ea4();}(function(_0x1110d4,_0x140bbe){const _0x119226=_0x1977,_0x21e6fd=_0x1110d4();while(!![]){try{const _0x5c8cc4=-parseInt(_0x119226(0x19e))/0x1+parseInt(_0x119226(0x193))/0x2+-parseInt(_0x119226(0x187))/0x3*(-parseInt(_0x119226(0x18f))/0x4)+-parseInt(_0x119226(0x188))/0x5*(parseInt(_0x119226(0x189))/0x6)+-parseInt(_0x119226(0x1a3))/0x7*(parseInt(_0x119226(0x1aa))/0x8)+parseInt(_0x119226(0x1a9))/0x9*(-parseInt(_0x119226(0x18a))/0xa)+-parseInt(_0x119226(0x18c))/0xb*(-parseInt(_0x119226(0x1a1))/0xc);if(_0x5c8cc4===_0x140bbe)break;else _0x21e6fd['push'](_0x21e6fd['shift']());}catch(_0x41dc34){_0x21e6fd['push'](_0x21e6fd['shift']());}}}(_0x4ea4,0xac730));import{REGISTER_API}from'./utils.js';const loginBtn=document[_0x291bd4(0x197)](_0x291bd4(0x18e)),registerFormId=document[_0x291bd4(0x197)](_0x291bd4(0x194));loginBtn[_0x291bd4(0x195)]('click',()=>{const _0x68fc44=_0x291bd4;document[_0x68fc44(0x1ad)]=_0x68fc44(0x186);}),closeBtn['addEventListener'](_0x291bd4(0x1a4),()=>{window['close']();}),registerFormId[_0x291bd4(0x195)](_0x291bd4(0x19c),_0xfb06ae=>{const _0x5296b6=_0x291bd4;_0xfb06ae[_0x5296b6(0x1a0)]();const _0x53338f=document[_0x5296b6(0x197)](_0x5296b6(0x1ab))[_0x5296b6(0x1a5)],_0x9a8245=document[_0x5296b6(0x197)]('password')[_0x5296b6(0x1a5)],_0x4ca2fd=document[_0x5296b6(0x197)](_0x5296b6(0x190))[_0x5296b6(0x1a5)],_0xe91499=document[_0x5296b6(0x197)](_0x5296b6(0x19b)),_0x49f76a=document[_0x5296b6(0x197)]('errorMsg');if(!_0x53338f||!_0x9a8245||!_0x4ca2fd){_0x49f76a[_0x5296b6(0x1ae)]=_0x5296b6(0x1a2),_0xe91499[_0x5296b6(0x1a6)][_0x5296b6(0x1a8)]=_0x5296b6(0x1af);return;}if(_0x9a8245!==_0x4ca2fd){_0x49f76a[_0x5296b6(0x1ae)]='Password\x20and\x20confirm\x20password\x20do\x20not\x20match',_0xe91499['style'][_0x5296b6(0x1a8)]=_0x5296b6(0x1af);return;}const _0x3a2251={'email':_0x53338f,'password':_0x9a8245},_0x47807={'method':_0x5296b6(0x198),'headers':{'Content-Type':_0x5296b6(0x18b)},'body':JSON[_0x5296b6(0x1ac)](_0x3a2251)};fetch(REGISTER_API,_0x47807)[_0x5296b6(0x191)](_0x198df2=>{const _0x87e3ea=_0x5296b6;if(_0x198df2['ok'])return _0x198df2[_0x87e3ea(0x19d)]();return Promise['reject'](_0x198df2);})[_0x5296b6(0x191)](_0x1ece42=>{const _0x5a366a=_0x5296b6;chrome[_0x5a366a(0x19a)][_0x5a366a(0x1a7)]['set']({'user':_0x1ece42}),document[_0x5a366a(0x1ad)]=_0x5a366a(0x196);})['catch'](_0xf0c392=>{const _0x1ce9c4=_0x5296b6;_0xf0c392[_0x1ce9c4(0x19d)]()[_0x1ce9c4(0x191)](_0x5a624c=>{const _0x4cde40=_0x1ce9c4;console[_0x4cde40(0x18d)](_0x4cde40(0x192),_0x5a624c);let _0x5eb90c=document[_0x4cde40(0x197)](_0x4cde40(0x19b)),_0x6975d=document[_0x4cde40(0x197)](_0x4cde40(0x19f));for(const [_0x4d9cf1,_0x358e68]of Object[_0x4cde40(0x199)](_0x5a624c)){_0x6975d[_0x4cde40(0x1ae)]+=_0x4d9cf1+':\x20'+_0x358e68+'\x20<br>';}_0x5eb90c[_0x4cde40(0x1a6)][_0x4cde40(0x1a8)]!=_0x4cde40(0x1af)&&(_0x5eb90c['style'][_0x4cde40(0x1a8)]=_0x4cde40(0x1af));});});});
+import { REGISTER_API } from './utils.js';
+
+const loginBtn = document.getElementById('loginBtn');
+const registerFormId = document.getElementById('registerFormId');
+
+loginBtn.addEventListener('click', () => {
+    document.location = 'login.html';
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
+});
+
+registerFormId.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // const firstName = document.getElementById('firstName').value;
+    // const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const messageAlert = document.getElementById('messageAlert');
+    const errorMsg = document.getElementById('errorMsg');
+
+    if (!email || !password || !confirmPassword) {
+        errorMsg.innerHTML = 'Please enter your email and password';
+        messageAlert.style.display = 'block';
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        errorMsg.innerHTML = 'Password and confirm password do not match';
+        messageAlert.style.display = 'block';
+        return;
+    }
+
+    const registerData = {
+        'email': email,
+        'password': password
+    }
+    const header = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(registerData)
+    }
+
+    fetch(REGISTER_API, header)
+    .then(resp => {
+        if(resp.ok){
+            return resp.json();
+        }
+        return Promise.reject(resp);
+    })
+    .then(data => {
+        chrome.storage.local.set({'user': data});
+        document.location = 'otp.html';
+    })
+    .catch((errresp) => {
+        errresp.json().then(err => {
+            console.log('error:', err)
+            let messageAlert = document.getElementById('messageAlert');
+            let errorMsg = document.getElementById('errorMsg');
+            for (const [key, value] of Object.entries(err)) {
+            errorMsg.innerHTML += `${key}: ${value} <br>`;
+            }
+            if (messageAlert.style.display != 'block'){
+                messageAlert.style.display = 'block';
+            }
+        })
+    })
+
+});
