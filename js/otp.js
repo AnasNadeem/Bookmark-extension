@@ -1,4 +1,4 @@
-import { OTP_API } from './utils.js';
+import { OTP_API } from './constants.js';
 
 const otpFormId = document.getElementById('otpFormId');
 const otpInput = document.getElementById('otp');

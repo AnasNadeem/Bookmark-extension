@@ -1,4 +1,4 @@
-import { REGISTER_API } from './utils.js';
+import { REGISTER_API } from './constants.js';
 
 const loginBtn = document.getElementById('loginBtn');
 const registerFormId = document.getElementById('registerFormId');

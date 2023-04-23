@@ -1,4 +1,5 @@
-import { getActiveTab, generateTags, BOOKMARK_API } from "./utils.js";
+import { getActiveTab, generateTags} from "./utils.js";
+import { BOOKMARK_API } from "./constants.js";
 
 const formUrl = document.getElementById("url");
 const formTitle = document.getElementById("title");
@@ -9,6 +10,8 @@ const closeBtn = document.getElementById("closeBtn");
 const currentTab = await getActiveTab();
 formUrl.value = currentTab.url;
 formTitle.value = currentTab.title;
+
+// Top 3 Tags
 
 // Suggested tags based on site title
 const suggestiveTags = generateTags(currentTab.title);

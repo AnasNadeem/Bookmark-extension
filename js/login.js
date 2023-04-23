@@ -1,4 +1,4 @@
-import { LOGIN_API } from './utils.js';
+import { LOGIN_API } from './constants.js';
 
 const registerBtn = document.getElementById('registerBtn');
 
