@@ -44,8 +44,9 @@ otpFormId.addEventListener('submit', (e) => {
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            console.log('error:', err)
-            errorMsg.innerHTML = err.error;
+            for (const [key, value] of Object.entries(err)) {
+                errorMsg.innerHTML += `${key}: ${value}`;
+            }
             successMsg.innerHTML = '';
             if (messageAlert.style.display != 'block'){
                 messageAlert.style.display = 'block';

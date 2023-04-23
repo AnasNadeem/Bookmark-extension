@@ -2,6 +2,7 @@ import { REGISTER_API } from './constants.js';
 
 const loginBtn = document.getElementById('loginBtn');
 const registerFormId = document.getElementById('registerFormId');
+const errorMsg = document.getElementById('errorMsg');
 
 loginBtn.addEventListener('click', () => {
     document.location = 'login.html';
@@ -20,7 +21,6 @@ registerFormId.addEventListener('submit', (e) => {
     const confirmPassword = document.getElementById('confirmPassword').value;
 
     const messageAlert = document.getElementById('messageAlert');
-    const errorMsg = document.getElementById('errorMsg');
 
     if (!email || !password || !confirmPassword) {
         errorMsg.innerHTML = 'Please enter your email and password';
@@ -57,9 +57,7 @@ registerFormId.addEventListener('submit', (e) => {
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            console.log('error:', err)
             let messageAlert = document.getElementById('messageAlert');
-            let errorMsg = document.getElementById('errorMsg');
             for (const [key, value] of Object.entries(err)) {
             errorMsg.innerHTML += `${key}: ${value} <br>`;
             }

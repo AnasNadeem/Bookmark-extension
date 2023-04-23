@@ -95,7 +95,9 @@ bookmarkFormId.addEventListener('submit', (e) => {
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            errorMsg.innerHTML = err.error;
+            for (const [key, value] of Object.entries(err)) {
+                errorMsg.innerHTML += `${key}: ${value}`;
+            }
             successMsg.innerHTML = '';
             messageAlert.style.display = 'block';
         })
