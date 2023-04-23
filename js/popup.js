@@ -6,19 +6,51 @@ const formTitle = document.getElementById("title");
 const formTags = document.getElementById("tags");
 const tagsSuggestion = document.getElementById("tagsSuggestion");
 const closeBtn = document.getElementById("closeBtn");
+const bookmarkFormId = document.getElementById('bookmarkFormId');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
+const successMsg = document.getElementById('successMsg');
+const formTitleHeading = document.getElementById('formTitleHeading');
+
+let user = {}
+chrome.storage.local.get('user', (data) => {
+    user = data.user;
+});
 
 const currentTab = await getActiveTab();
 formUrl.value = currentTab.url;
 formTitle.value = currentTab.title;
 
+// Check if bookmark exist with same url
+const getApiHeader = {
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${user.token}`
+    },
+}
+const existingBookmark = await fetch(`${BOOKMARK_API}?url=${currentTab.url}`, getApiHeader);
+if (existingBookmark.ok) {
+    let existingBookmarkData = await existingBookmark.json();
+    if (existingBookmarkData.length > 0){
+        existingBookmarkData = existingBookmarkData[0];
+        formTitleHeading.innerText = "Edit Bookmark";
+        const tags = existingBookmarkData.tags.map(tag => tag.name).join(", ");
+        formTags.value = tags + ", ";
+    }
+}
+
 // Top 3 Tags
 
 // Suggested tags based on site title
 const suggestiveTags = generateTags(currentTab.title);
-for (const tag of suggestiveTags) {
+for (let tag of suggestiveTags) {
+    tag = tag.toLowerCase();
+    if (formTags.value.includes(tag)) {
+        continue;
+    }
     const tagElement = document.createElement("p");
     tagElement.classList.add("tag");
-    tagElement.innerText = tag.toLowerCase();
+    tagElement.innerText = tag;
     tagsSuggestion.appendChild(tagElement);
 }
 
@@ -28,21 +60,6 @@ tagsSuggestion.addEventListener("click", (e) => {
         e.target.remove();
     }
 });
-
-closeBtn.addEventListener("click", () => {
-    window.close();
-});
-
-let user = {}
-chrome.storage.local.get('user', (data) => {
-    user = data.user;
-});
-
-const bookmarkFormId = document.getElementById('bookmarkFormId');
-const messageAlert = document.getElementById('messageAlert');
-const errorMsg = document.getElementById('errorMsg');
-const successMsg = document.getElementById('successMsg');
-
 
 bookmarkFormId.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -102,4 +119,8 @@ bookmarkFormId.addEventListener('submit', (e) => {
             messageAlert.style.display = 'block';
         })
     })
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
 });
