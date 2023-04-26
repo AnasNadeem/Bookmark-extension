@@ -1,4 +1,4 @@
-import { LOGIN_API } from './utils.js';
+import { LOGIN_API } from './constants.js';
 
 const registerBtn = document.getElementById('registerBtn');
 
@@ -58,7 +58,9 @@ loginFormId.addEventListener('submit', (e) => {
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            errorMsg.innerHTML = err.error;
+            for (const [key, value] of Object.entries(err)) {
+                errorMsg.innerHTML += `${key}: ${value}`;
+            }
             if (messageAlert.style.display != 'block'){
                 messageAlert.style.display = 'block';
             }

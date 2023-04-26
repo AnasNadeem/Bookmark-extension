@@ -1,21 +1,81 @@
-import { getActiveTab, generateTags, BOOKMARK_API } from "./utils.js";
+import { getActiveTab, generateTags} from "./utils.js";
+import { BOOKMARK_API, TAGS_IN_API } from "./constants.js";
 
-const formUrl = document.getElementById("url");
+// const formUrl = document.getElementById("url");
 const formTitle = document.getElementById("title");
 const formTags = document.getElementById("tags");
 const tagsSuggestion = document.getElementById("tagsSuggestion");
 const closeBtn = document.getElementById("closeBtn");
+const bookmarkFormId = document.getElementById('bookmarkFormId');
+const messageAlert = document.getElementById('messageAlert');
+const errorMsg = document.getElementById('errorMsg');
+const successMsg = document.getElementById('successMsg');
+const formTitleHeading = document.getElementById('formTitleHeading');
+
+let existingBookmarkId = null; 
+let user = {}
+chrome.storage.local.get('user', (data) => {
+    user = data.user;
+});
 
 const currentTab = await getActiveTab();
-formUrl.value = currentTab.url;
+const urlInput = currentTab.url;
+// formUrl.value = currentTab.url;
 formTitle.value = currentTab.title;
+
+// Check if bookmark exist with same url
+const getApiHeader = {
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${user.token}`
+    },
+}
+const existingBookmark = await fetch(`${BOOKMARK_API}?url=${currentTab.url}`, getApiHeader);
+if (existingBookmark.ok) {
+    let existingBookmarkData = await existingBookmark.json();
+    if (existingBookmarkData.length > 0){
+        existingBookmarkData = existingBookmarkData[0];
+        existingBookmarkId = existingBookmarkData.id;
+        // formUrl.value = existingBookmarkData.url;
+        formTitle.value = existingBookmarkData.title;
+        formTitleHeading.innerText = "Edit Bookmark";
+        const tags = existingBookmarkData.tags.map(tag => tag.name).join(", ");
+        formTags.value = tags + ", ";
+    }
+}
 
 // Suggested tags based on site title
 const suggestiveTags = generateTags(currentTab.title);
-for (const tag of suggestiveTags) {
+
+// const tagsInBody = {
+//     name: suggestiveTags
+// }
+// const tagsInHeader = {
+//     method: 'PUT',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `${user.token}`
+//     },
+//     body: JSON.stringify(tagsInBody)
+// }
+// const usedTags = await fetch(TAGS_IN_API, tagsInHeader);
+// if (usedTags.ok) {
+//     const usedTagsData = await usedTags.json();
+//     console.log(usedTagsData);
+//     for (const tag of usedTagsData) {
+//         if (suggestiveTags.includes(tag)) {
+//             suggestiveTags.splice(suggestiveTags.indexOf(tag), 1);
+//         }
+//     }
+// }
+for (let tag of suggestiveTags) {
+    tag = tag.toLowerCase();
+    if (formTags.value.includes(tag)) {
+        continue;
+    }
     const tagElement = document.createElement("p");
     tagElement.classList.add("tag");
-    tagElement.innerText = tag.toLowerCase();
+    tagElement.innerText = tag;
     tagsSuggestion.appendChild(tagElement);
 }
 
@@ -26,24 +86,9 @@ tagsSuggestion.addEventListener("click", (e) => {
     }
 });
 
-closeBtn.addEventListener("click", () => {
-    window.close();
-});
-
-let user = {}
-chrome.storage.local.get('user', (data) => {
-    user = data.user;
-});
-
-const bookmarkFormId = document.getElementById('bookmarkFormId');
-const messageAlert = document.getElementById('messageAlert');
-const errorMsg = document.getElementById('errorMsg');
-const successMsg = document.getElementById('successMsg');
-
-
 bookmarkFormId.addEventListener('submit', (e) => {
     e.preventDefault();
-    const urlInput = document.getElementById('url').value;
+    // const urlInput = document.getElementById('url').value;
     const titleInput = document.getElementById('title').value;
     const tagsInput = document.getElementById('tags').value;
 
@@ -68,9 +113,7 @@ bookmarkFormId.addEventListener('submit', (e) => {
         'title': titleInput,
         'tags': tagList
     }
-
     const header = {
-        method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `${user.token}`
@@ -78,7 +121,18 @@ bookmarkFormId.addEventListener('submit', (e) => {
         body: JSON.stringify(bookmarkData)
     }
 
-    fetch(BOOKMARK_API, header)
+    let bookmarkApi = BOOKMARK_API;
+    let successMsg = 'Bookmark added successfully';
+    if (existingBookmarkId) {
+        bookmarkData.id = existingBookmarkId;
+        header.method = 'PUT';
+        bookmarkApi = `${BOOKMARK_API}/${existingBookmarkId}`;
+        successMsg = 'Bookmark updated successfully';
+    }else{
+        header.method = 'POST';
+    }
+
+    fetch(bookmarkApi, header)
     .then(resp => {
         if (resp.ok){
             return resp.json()
@@ -86,15 +140,21 @@ bookmarkFormId.addEventListener('submit', (e) => {
         return Promise.reject(resp);
     })
     .then(data => {
-        successMsg.innerHTML = 'Bookmark added successfully';
+        successMsg.innerHTML = successMsg;
         errorMsg.innerHTML = '';
         messageAlert.style.display = 'block';
     })
     .catch((errresp) => {
         errresp.json().then(err => {
-            errorMsg.innerHTML = err.error;
+            for (const [key, value] of Object.entries(err)) {
+                errorMsg.innerHTML += `${key}: ${value}`;
+            }
             successMsg.innerHTML = '';
             messageAlert.style.display = 'block';
         })
     })
+});
+
+closeBtn.addEventListener("click", () => {
+    window.close();
 });
