@@ -12,12 +12,14 @@ const errorMsg = document.getElementById('errorMsg');
 const successMsg = document.getElementById('successMsg');
 const formTitleHeading = document.getElementById('formTitleHeading');
 
+let existingBookmarkId = null; 
 let user = {}
 chrome.storage.local.get('user', (data) => {
     user = data.user;
 });
 
 const currentTab = await getActiveTab();
+const urlInput = currentTab.url;
 // formUrl.value = currentTab.url;
 formTitle.value = currentTab.title;
 
@@ -33,6 +35,9 @@ if (existingBookmark.ok) {
     let existingBookmarkData = await existingBookmark.json();
     if (existingBookmarkData.length > 0){
         existingBookmarkData = existingBookmarkData[0];
+        existingBookmarkId = existingBookmarkData.id;
+        // formUrl.value = existingBookmarkData.url;
+        formTitle.value = existingBookmarkData.title;
         formTitleHeading.innerText = "Edit Bookmark";
         const tags = existingBookmarkData.tags.map(tag => tag.name).join(", ");
         formTags.value = tags + ", ";
@@ -83,7 +88,7 @@ tagsSuggestion.addEventListener("click", (e) => {
 
 bookmarkFormId.addEventListener('submit', (e) => {
     e.preventDefault();
-    const urlInput = document.getElementById('url').value;
+    // const urlInput = document.getElementById('url').value;
     const titleInput = document.getElementById('title').value;
     const tagsInput = document.getElementById('tags').value;
 
@@ -108,9 +113,7 @@ bookmarkFormId.addEventListener('submit', (e) => {
         'title': titleInput,
         'tags': tagList
     }
-
     const header = {
-        method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `${user.token}`
@@ -118,7 +121,18 @@ bookmarkFormId.addEventListener('submit', (e) => {
         body: JSON.stringify(bookmarkData)
     }
 
-    fetch(BOOKMARK_API, header)
+    let bookmarkApi = BOOKMARK_API;
+    let successMsg = 'Bookmark added successfully';
+    if (existingBookmarkId) {
+        bookmarkData.id = existingBookmarkId;
+        header.method = 'PUT';
+        bookmarkApi = `${BOOKMARK_API}/${existingBookmarkId}`;
+        successMsg = 'Bookmark updated successfully';
+    }else{
+        header.method = 'POST';
+    }
+
+    fetch(bookmarkApi, header)
     .then(resp => {
         if (resp.ok){
             return resp.json()
@@ -126,7 +140,7 @@ bookmarkFormId.addEventListener('submit', (e) => {
         return Promise.reject(resp);
     })
     .then(data => {
-        successMsg.innerHTML = 'Bookmark added successfully';
+        successMsg.innerHTML = successMsg;
         errorMsg.innerHTML = '';
         messageAlert.style.display = 'block';
     })
