@@ -1,7 +1,7 @@
 import { getActiveTab, generateTags} from "./utils.js";
-import { BOOKMARK_API } from "./constants.js";
+import { BOOKMARK_API, TAGS_IN_API } from "./constants.js";
 
-const formUrl = document.getElementById("url");
+// const formUrl = document.getElementById("url");
 const formTitle = document.getElementById("title");
 const formTags = document.getElementById("tags");
 const tagsSuggestion = document.getElementById("tagsSuggestion");
@@ -18,7 +18,7 @@ chrome.storage.local.get('user', (data) => {
 });
 
 const currentTab = await getActiveTab();
-formUrl.value = currentTab.url;
+// formUrl.value = currentTab.url;
 formTitle.value = currentTab.title;
 
 // Check if bookmark exist with same url
@@ -39,10 +39,30 @@ if (existingBookmark.ok) {
     }
 }
 
-// Top 3 Tags
-
 // Suggested tags based on site title
 const suggestiveTags = generateTags(currentTab.title);
+
+// const tagsInBody = {
+//     name: suggestiveTags
+// }
+// const tagsInHeader = {
+//     method: 'PUT',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `${user.token}`
+//     },
+//     body: JSON.stringify(tagsInBody)
+// }
+// const usedTags = await fetch(TAGS_IN_API, tagsInHeader);
+// if (usedTags.ok) {
+//     const usedTagsData = await usedTags.json();
+//     console.log(usedTagsData);
+//     for (const tag of usedTagsData) {
+//         if (suggestiveTags.includes(tag)) {
+//             suggestiveTags.splice(suggestiveTags.indexOf(tag), 1);
+//         }
+//     }
+// }
 for (let tag of suggestiveTags) {
     tag = tag.toLowerCase();
     if (formTags.value.includes(tag)) {
