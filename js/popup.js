@@ -11,6 +11,7 @@ const messageAlert = document.getElementById('messageAlert');
 const errorMsg = document.getElementById('errorMsg');
 const successMsg = document.getElementById('successMsg');
 const formTitleHeading = document.getElementById('formTitleHeading');
+const easemylinkTitleId = document.getElementById('easemylinkTitleId');
 
 let existingBookmarkId = null; 
 let user = {}
@@ -86,6 +87,12 @@ tagsSuggestion.addEventListener("click", (e) => {
     }
 });
 
+easemylinkTitleId.addEventListener("click", (e) => {
+    if (e.target.nodeName==="H1") {
+        chrome.tabs.create({url: chrome.runtime.getURL('./index.html')});
+    }
+});
+
 bookmarkFormId.addEventListener('submit', (e) => {
     e.preventDefault();
     // const urlInput = document.getElementById('url').value;
@@ -122,12 +129,12 @@ bookmarkFormId.addEventListener('submit', (e) => {
     }
 
     let bookmarkApi = BOOKMARK_API;
-    let successMsg = 'Bookmark added successfully';
+    let successMsgValue = 'Bookmark added successfully';
     if (existingBookmarkId) {
         bookmarkData.id = existingBookmarkId;
         header.method = 'PUT';
         bookmarkApi = `${BOOKMARK_API}/${existingBookmarkId}`;
-        successMsg = 'Bookmark updated successfully';
+        successMsgValue = 'Bookmark updated successfully';
     }else{
         header.method = 'POST';
     }
@@ -140,7 +147,7 @@ bookmarkFormId.addEventListener('submit', (e) => {
         return Promise.reject(resp);
     })
     .then(data => {
-        successMsg.innerHTML = successMsg;
+        successMsg.innerHTML = successMsgValue;
         errorMsg.innerHTML = '';
         messageAlert.style.display = 'block';
     })
