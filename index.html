@@ -1,12 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Main page</h1>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>EaseMyLink</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="bodyContainer">
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li class="link" id="logo">
+              <h1>Easemylink</h1>
+            </li>
+            <li class="link" id="search">
+              <div class="row">
+                <i
+                  class="icon fa-solid fa-magnifying-glass"
+                  style="color: #5f5d604d"
+                ></i>
+                <input type="search" name="search" placeholder="Search" />
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-bars-progress icon"></i>
+                <span class="rowTitle">Inbox</span>
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-bell icon"></i>
+                <span class="rowTitle">Activity</span>
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-book icon"></i>
+                <span class="rowTitle">Schedule</span>
+              </div>
+            </li>
+            <hr class="line" />
+            <div class="row tagRowHeader">
+              <span class="tagRowHeaderTitle">Tags</span>
+              <i class="fa-solid fa-plus icon" style="color: #5f5d604d"></i>
+            </div>
+
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-tag icon"></i>
+                <span class="rowTitle">Boosts</span>
+              </div>
+            </li>
+
+            <li class="link">
+              <div class="row">
+                <span class="icon">#</span>
+                <span class="rowTitle">Documents</span>
+              </div>
+            </li>
+            <li class="link" id="logOut">
+              <div class="row">
+                <i class="fa-solid fa-right-from-bracket icon"></i>
+                <span class="rowTitle">Log Out</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="main">
+        <div class="mainContainer">
+          <div class="mainSearch" id="search">
+            <input type="search" placeholder="Search" />
+          </div>
+          <div class="cardsContainer">
+            <div class="card">
+              <div class="cardTitle">Lorem ipsum dolor sit amet.</div>
+              <div class="cardTags">
+                <ul>
+                  <li class="cardTag">
+                    <a href="#">#Design</a>
+                  </li>
+                  <li class="cardTag cardWebTag">
+                    <a href="#">Figma</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="cardBody">
+                Link: https://www.figma.com/
+                <div class="cardBtn">
+                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="cardTitle">Lorem ipsum dolor sit amet.</h2>
+              <div class="cardBody">
+                <a href="https://google.com">https://google.com</a>
+                <div class="cardBtn">
+                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+              </div>
+              <div class="cardTags">
+                <ul>
+                  <li class="cardTag">
+                    <a href="#">#B59</a>
+                  </li>
+                  <li class="cardTag cardWebTag">
+                    <a href="#">iOS</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
