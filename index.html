@@ -1,12 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Main page</h1>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>EaseMyLink</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="bodyContainer">
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li class="link" id="logo">
+              <h1>Easemylink</h1>
+            </li>
+            <li class="link" id="search">
+              <div class="row">
+                <i
+                  class="icon fa-solid fa-magnifying-glass"
+                  style="color: #5f5d604d"
+                ></i>
+                <input type="search" name="search" placeholder="Search" />
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-bars-progress icon"></i>
+                <span class="rowTitle">Google</span>
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-bell icon"></i>
+                <span class="rowTitle">Stackoverflow</span>
+              </div>
+            </li>
+            <li class="link">
+              <div class="row">
+                <i class="fa-solid fa-book icon"></i>
+                <span class="rowTitle">Youtube</span>
+              </div>
+            </li>
+            <hr class="line" />
+            <div class="row tagRowHeader">
+              <span class="tagRowHeaderTitle">Tags</span>
+              <i class="fa-solid fa-plus icon" style="color: #5f5d604d"></i>
+            </div>
+
+            <li class="link">
+              <div class="row">
+                <span class="icon">#</span>
+                <!-- <i class="fa-solid fa-tag icon"></i> -->
+                <span class="rowTitle">Design</span>
+              </div>
+            </li>
+
+            <li class="link">
+              <div class="row">
+                <span class="icon">#</span>
+                <!-- <i class="fa-solid fa-tag icon"></i> -->
+                <span class="rowTitle">Django</span>
+              </div>
+            </li>
+            <li class="link" id="logOut">
+              <div class="row">
+                <i class="fa-solid fa-right-from-bracket icon"></i>
+                <span class="rowTitle">Log Out</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <div class="main">
+        <div class="mainContainer">
+          <table class="tagsTable">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Link</th>
+                <th scope="col">Tags</th>
+                <th></th>
+              </tr>
+              <tr>
+                <td>Google - Search Engine</td>
+                <td>www.google.com</td>
+                <td>
+                  <ul class="tableTags">
+                  <li class="tableTag">#google</li>
+                  <li class="tableTag">#search</li>
+                </ul>
+                </td>
+                <td>
+                  <i class="fas fa-edit"></i>
+                  <i class="fa-solid fa-trash trashIcon"></i>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
