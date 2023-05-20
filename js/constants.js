@@ -5,3 +5,4 @@ export const OTP_API = `${BASE_API}/user/verify_otp`;
 export const BOOKMARK_API = `${BASE_API}/bookmark`;
 export const TAG_API = `${BASE_API}/tag`;
 export const TAGS_IN_API = `${BASE_API}/tag/tags_in`;
+export const SITE_API = `${BASE_API}/site`;
