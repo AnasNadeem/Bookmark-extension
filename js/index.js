@@ -122,3 +122,30 @@ window.onload = () => {
   getTags();
   getBookmarks();
 };
+
+bookmarkTbody.addEventListener("click", (e) => {
+  if (e.target.classList.contains("trashIcon")) {
+    const id = e.target.parentElement.parentElement.id.replace("bookmark", "");
+    deleteBookmark(id);
+  }
+});
+
+// DELETE BOOKMARK
+const deleteBookmark = async (id) => {
+  let bookmarkElem = document.getElementById(`bookmark${id}`);
+  const user = await readLocalStorage("user");
+  const token = user.token;
+  const headersData = {
+    Authorization: `${token}`,
+    "Content-Type": "application/json",
+  };
+
+  const headersMethodDelete = {method:'DELETE', headers: headersData}
+  fetch(`${BOOKMARK_API}/${id}`, headersMethodDelete)
+  .then(resp => {
+    if (resp.ok){
+      bookmarkElem.remove()
+      return resp;
+    }
+  })
+}
