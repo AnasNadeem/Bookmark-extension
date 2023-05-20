@@ -195,6 +195,10 @@ body {
     cursor: default;
     background-color: #eff3f6;
 }
+
+.breadcrumbItem:hover{
+    cursor: pointer;
+}
 /* Breadcrumb CSS Ends */
 
 /* Table CSS Starts  */
