@@ -1,9 +1,12 @@
 const BASE_API = "http://127.0.0.1:8000/api";
 const SITE_API = `${BASE_API}/site`;
 const TAG_API = `${BASE_API}/tag`;
+const BOOKMARK_API = `${BASE_API}/bookmark`;
 
 const siteLinkSidebar = document.getElementById("siteLinkSidebar");
 const tagLinkSidebar = document.getElementById("tagLinkSidebar");
+const bookmarkTbody = document.getElementById("bookmarkTbody");
+const breadcrumbList = document.getElementById("breadcrumbList");
 
 const readLocalStorage = async (key) => {
   return new Promise((resolve, reject) => {
@@ -21,24 +24,22 @@ const readLocalStorage = async (key) => {
 const getSite = async () => {
   const user = await readLocalStorage("user");
   const token = user.token;
-  console.log(token);
   const headersData = {
     Authorization: `${token}`,
     "Content-Type": "application/json",
   };
   const headersMethodGet = { method: "GET", headers: headersData };
+
   fetch(SITE_API, headersMethodGet)
     .then((resp) => {
       return resp.json();
     })
-    .then((data) => {
+    .then( data => {
       data.forEach((site) => {
         siteLinkSidebar.innerHTML += `
-        <li class="link" id="site${site.id}">
-          <div class="row">
-            <i class="fa-solid fa-bars-progress icon"></i>
-            <span class="rowTitle">${site.name}</span>
-          </div>
+        <li class="link row" id="site${site.id}">
+          <i class="fa-solid fa-bars-progress icon"></i>
+          <span class="rowTitle">${site.name}</span>
         </li>
         `;
       });
@@ -54,11 +55,12 @@ const getTags = async () => {
     "Content-Type": "application/json",
   };
   const headersMethodGet = { method: "GET", headers: headersData };
+
   fetch(TAG_API, headersMethodGet)
     .then((resp) => {
       return resp.json();
     })
-    .then((data) => {
+    .then( data => {
       data.forEach((tag) => {
         tagLinkSidebar.innerHTML += `
         <li class="link" id="tag${tag.id}">
@@ -73,7 +75,118 @@ const getTags = async () => {
     });
 };
 
+// GET BOOKMARK
+const getBookmarks = async () => {
+  const user = await readLocalStorage("user");
+  const token = user.token;
+  const headersData = {
+    Authorization: `${token}`,
+    "Content-Type": "application/json",
+  };
+  const headersMethodGet = { method: "GET", headers: headersData };
+
+  fetch(BOOKMARK_API, headersMethodGet)
+    .then( resp => {
+      return resp.json();
+    })
+    .then( data => {
+      data.forEach((bookmark) => {
+        bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
+      });
+    });
+};
+
 window.onload = () => {
   getSite();
   getTags();
+  getBookmarks();
 };
+
+bookmarkTbody.addEventListener("click", (e) => {
+  if (e.target.classList.contains("trashIcon")) {
+    const id = e.target.parentElement.parentElement.id.replace("bookmark", "");
+    deleteBookmark(id);
+  }
+});
+
+// DELETE BOOKMARK
+const deleteBookmark = async (id) => {
+  let bookmarkElem = document.getElementById(`bookmark${id}`);
+  const user = await readLocalStorage("user");
+  const token = user.token;
+  const headersData = {
+    Authorization: `${token}`,
+    "Content-Type": "application/json",
+  };
+
+  const headersMethodDelete = {method:'DELETE', headers: headersData}
+  fetch(`${BOOKMARK_API}/${id}`, headersMethodDelete)
+  .then( resp => {
+    if (resp.ok){
+      bookmarkElem.remove()
+      return resp;
+    }
+  })
+}
+
+siteLinkSidebar.addEventListener("click", (e) => {
+  if (e.target.parentElement.classList.contains("link")) {
+    const id = e.target.parentElement.id.replace("site", "");
+    const name = e.target.parentElement.querySelector(".rowTitle").innerText;
+    getSiteBookmarks(id, name);
+  }
+});
+
+// GET SITE BOOKMARKS
+const getSiteBookmarks = async (id, name) => {
+  const user = await readLocalStorage("user");
+  const token = user.token;
+  const headersData = {
+    Authorization: token,
+    "Content-Type": "application/json",
+  };
+  const headersMethodGet = { method: "GET", headers: headersData };
+
+  fetch(`${SITE_API}/${id}/bookmarks`, headersMethodGet)
+    .then((resp) => {
+      return resp.json();
+    })
+    .then( data => {
+      bookmarkTbody.innerHTML = "";
+      data.forEach( bookmark => {
+        bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
+      });
+  });
+
+  breadcrumbList.innerHTML += `<li class="breadcrumbItem">${name}</li>`;
+};
+
+const bookmarkRowTemplate = (bookmark) => {
+  return `
+  <tr id="bookmark${bookmark.id}">
+    <td>${bookmark.title}</td>
+    <td>
+      <a href="${bookmark.url}" target="_blank">
+        ${bookmark.url}
+      </a>
+    </td>
+    <td>
+      <ul class="tableTags">
+        ${bookmark.tags.map((tag) => {
+          return `<li class="tableTag">#${tag.name}</li>`;
+        })}
+      </ul>
+    </td>
+    <td>
+      <i class="fas fa-edit"></i>
+      <i class="fa-solid fa-trash trashIcon"></i>
+    </td>
+  </tr>
+  `;
+}
+
+breadcrumbList.addEventListener("click", (e) => {
+  if (e.target.id === "breadcrumbShowAllBookmark") {
+    getBookmarks();
+  }
+});

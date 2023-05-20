@@ -66,30 +66,19 @@
       </aside>
       <div class="main">
         <div class="mainContainer">
-          <ul class="breadcrumb">
-            <li class="breadcrumbItem">All</li>
+          <ul id="breadcrumbList" class="breadcrumb">
+            <li class="breadcrumbItem" id="breadcrumbShowAllBookmark">All</li>
           </ul>
-          <table class="tagsTable">
+          <table class="bookmarkTable">
+            <thead>
               <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Link</th>
                 <th scope="col">Tags</th>
                 <th></th>
               </tr>
-              <tr>
-                <td>Google - Search Engine</td>
-                <td>www.google.com</td>
-                <td>
-                  <ul class="tableTags">
-                  <li class="tableTag">#google</li>
-                  <li class="tableTag">#search</li>
-                </ul>
-                </td>
-                <td>
-                  <i class="fas fa-edit"></i>
-                  <i class="fa-solid fa-trash trashIcon"></i>
-                </td>
-              </tr>
+            </thead>
+            <tbody id="bookmarkTbody"></tbody>
           </table>
         </div>
       </div>

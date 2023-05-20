@@ -195,29 +195,33 @@ body {
     cursor: default;
     background-color: #eff3f6;
 }
+
+.breadcrumbItem:hover{
+    cursor: pointer;
+}
 /* Breadcrumb CSS Ends */
 
 /* Table CSS Starts  */
-.tagsTable {
+.bookmarkTable {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tagsTable td,
-.tagsTable th {
+.bookmarkTable tbody td,
+.bookmarkTable thead th {
     border: 1px solid var(--secondary-color);
     padding-left: 8px;
 }
 
-.tagsTable tr:nth-child(even) {
+.bookmarkTable tbody tr{
     background-color: #fff;
 }
 
-.tagsTable tr:hover {
+.bookmarkTable tbody tr:hover {
     background-color: var(--secondary-color);
 }
 
-.tagsTable th {
+.bookmarkTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -247,4 +251,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.trashIcon:hover{
+    color: #c70000;
+}
 /* Table CSS Ends */
