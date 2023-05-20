@@ -8,6 +8,7 @@ const tagLinkSidebar = document.getElementById("tagLinkSidebar");
 const bookmarkTbody = document.getElementById("bookmarkTbody");
 const breadcrumbList = document.getElementById("breadcrumbList");
 
+// HELPER FUNCTIONS
 const readLocalStorage = async (key) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get([key], function (result) {
@@ -63,12 +64,10 @@ const getTags = async () => {
     .then( data => {
       data.forEach((tag) => {
         tagLinkSidebar.innerHTML += `
-        <li class="link" id="tag${tag.id}">
-          <div class="row">
-            <span class="icon">#</span>
-            <!-- <i class="fa-solid fa-tag icon"></i> -->
-            <span class="rowTitle">${tag.name}</span>
-          </div>
+        <li class="link row" id="tag${tag.id}">
+          <span class="icon">#</span>
+          <!-- <i class="fa-solid fa-tag icon"></i> -->
+          <span class="rowTitle">${tag.name}</span>
         </li>
         `;
       });
@@ -90,6 +89,7 @@ const getBookmarks = async () => {
       return resp.json();
     })
     .then( data => {
+      bookmarkTbody.innerHTML = "";
       data.forEach((bookmark) => {
         bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
       });
@@ -102,10 +102,33 @@ window.onload = () => {
   getBookmarks();
 };
 
+// ALL EVENT LISTENERS
 bookmarkTbody.addEventListener("click", (e) => {
   if (e.target.classList.contains("trashIcon")) {
     const id = e.target.parentElement.parentElement.id.replace("bookmark", "");
     deleteBookmark(id);
+  }
+});
+
+siteLinkSidebar.addEventListener("click", (e) => {
+  if (e.target.parentElement.classList.contains("link")) {
+    const id = e.target.parentElement.id.replace("site", "");
+    const name = e.target.parentElement.querySelector(".rowTitle").innerText;
+    getSiteBookmarks(id, name);
+  }
+});
+
+tagLinkSidebar.addEventListener("click", (e) => {
+  if (e.target.parentElement.classList.contains("link")) {
+    const id = e.target.parentElement.id.replace("tag", "");
+    const name = e.target.parentElement.querySelector(".rowTitle").innerText;
+    getTagBookmarks(id, name);
+  }
+});
+
+breadcrumbList.addEventListener("click", (e) => {
+  if (e.target.id === "breadcrumbShowAllBookmark") {
+    getBookmarks();
   }
 });
 
@@ -128,14 +151,6 @@ const deleteBookmark = async (id) => {
     }
   })
 }
-
-siteLinkSidebar.addEventListener("click", (e) => {
-  if (e.target.parentElement.classList.contains("link")) {
-    const id = e.target.parentElement.id.replace("site", "");
-    const name = e.target.parentElement.querySelector(".rowTitle").innerText;
-    getSiteBookmarks(id, name);
-  }
-});
 
 // GET SITE BOOKMARKS
 const getSiteBookmarks = async (id, name) => {
@@ -161,6 +176,31 @@ const getSiteBookmarks = async (id, name) => {
   breadcrumbList.innerHTML += `<li class="breadcrumbItem">${name}</li>`;
 };
 
+// GET TAG BOOKMARKS
+const getTagBookmarks = async (id, name) => {
+  const user = await readLocalStorage("user");
+  const token = user.token;
+  const headersData = {
+    Authorization: token,
+    "Content-Type": "application/json",
+  };
+  const headersMethodGet = { method: "GET", headers: headersData };
+
+  fetch(`${TAG_API}/${id}/bookmarks`, headersMethodGet)
+    .then((resp) => {
+      return resp.json();
+    })
+    .then( data => {
+      bookmarkTbody.innerHTML = "";
+      data.forEach( bookmark => {
+        bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
+      });
+  });
+
+  breadcrumbList.innerHTML += `<li class="breadcrumbItem">${name}</li>`;
+}
+
+// TEMPLATE
 const bookmarkRowTemplate = (bookmark) => {
   return `
   <tr id="bookmark${bookmark.id}">
@@ -184,9 +224,3 @@ const bookmarkRowTemplate = (bookmark) => {
   </tr>
   `;
 }
-
-breadcrumbList.addEventListener("click", (e) => {
-  if (e.target.id === "breadcrumbShowAllBookmark") {
-    getBookmarks();
-  }
-});
