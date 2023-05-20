@@ -21,6 +21,12 @@ const readLocalStorage = async (key) => {
   });
 };
 
+const resetBreadcrumb = () => {
+  breadcrumbList.innerHTML = `
+    <li class="breadcrumbItem" id="breadcrumbShowAllBookmark">All Bookmarks</li>
+  `;
+};
+
 // GET SITE
 const getSite = async () => {
   const user = await readLocalStorage("user");
@@ -128,6 +134,7 @@ tagLinkSidebar.addEventListener("click", (e) => {
 
 breadcrumbList.addEventListener("click", (e) => {
   if (e.target.id === "breadcrumbShowAllBookmark") {
+    resetBreadcrumb();
     getBookmarks();
   }
 });
@@ -172,7 +179,7 @@ const getSiteBookmarks = async (id, name) => {
         bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
       });
   });
-
+  resetBreadcrumb();
   breadcrumbList.innerHTML += `<li class="breadcrumbItem">${name}</li>`;
 };
 
@@ -196,7 +203,7 @@ const getTagBookmarks = async (id, name) => {
         bookmarkTbody.innerHTML += bookmarkRowTemplate(bookmark);
       });
   });
-
+  resetBreadcrumb();
   breadcrumbList.innerHTML += `<li class="breadcrumbItem">${name}</li>`;
 }
 
