@@ -260,7 +260,6 @@ searchInput.addEventListener("keyup", (e) => {
 
 // RESET DISPLAY OF TAGS AND SITES when search input is empty
 searchInput.addEventListener("search", (e) => {
-  console.log("search");
   const searchValue = e.target.value.toLowerCase();
   if (searchValue === "") {
     resetDisplay();
