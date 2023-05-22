@@ -7,6 +7,7 @@ const siteLinkSidebar = document.getElementById("siteLinkSidebar");
 const tagLinkSidebar = document.getElementById("tagLinkSidebar");
 const bookmarkTbody = document.getElementById("bookmarkTbody");
 const breadcrumbList = document.getElementById("breadcrumbList");
+const searchInput = document.getElementById("searchInput");
 
 // HELPER FUNCTIONS
 const readLocalStorage = async (key) => {
@@ -44,7 +45,7 @@ const getSite = async () => {
     .then( data => {
       data.forEach((site) => {
         siteLinkSidebar.innerHTML += `
-        <li class="link row" id="site${site.id}">
+        <li class="link row siteRow" id="site${site.id}">
           <i class="fa-solid fa-bars-progress icon"></i>
           <span class="rowTitle">${site.name}</span>
         </li>
@@ -70,7 +71,7 @@ const getTags = async () => {
     .then( data => {
       data.forEach((tag) => {
         tagLinkSidebar.innerHTML += `
-        <li class="link row" id="tag${tag.id}">
+        <li class="link row tagRow" id="tag${tag.id}">
           <span class="icon">#</span>
           <!-- <i class="fa-solid fa-tag icon"></i> -->
           <span class="rowTitle">${tag.name}</span>
@@ -230,4 +231,48 @@ const bookmarkRowTemplate = (bookmark) => {
     </td>
   </tr>
   `;
+}
+
+// SEARCH in TAGS and SITES
+searchInput.addEventListener("keyup", (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  const siteRow = document.querySelectorAll(".siteRow");
+  const tagRow = document.querySelectorAll(".tagRow");
+
+  siteRow.forEach((row) => {
+    const rowTitle = row.querySelector(".rowTitle").innerText.toLowerCase();
+    if (rowTitle.indexOf(searchValue) > -1) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  tagRow.forEach((row) => {
+    const rowTitle = row.querySelector(".rowTitle").innerText.toLowerCase();
+    if (rowTitle.indexOf(searchValue) > -1) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+
+// RESET DISPLAY OF TAGS AND SITES when search input is empty
+searchInput.addEventListener("search", (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  if (searchValue === "") {
+    resetDisplay();
+  }
+});
+
+const resetDisplay = () => {
+  const siteRow = document.querySelectorAll(".siteRow");
+  const tagRow = document.querySelectorAll(".tagRow");
+  siteRow.forEach((row) => {
+    row.style.display = "";
+  });
+  tagRow.forEach((row) => {
+    row.style.display = "";
+  });
 }
